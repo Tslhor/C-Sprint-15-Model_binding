@@ -1,0 +1,56 @@
+@model ProductsValidation.Models.BulkPriceEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Prices";
+}
+
+<h1>Edit Prices</h1>
+<h4 class="mb-3">Category: @Model.Type</h4>
+<div class="card">
+    <div class="card-body">
+    <div class="row">
+    <div class="col-12">
+        <form asp-action="EditPrices" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Type" type="hidden" />
+            <div class="table-responsive">
+            <table class="table table-dark table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for (var i = 0; i < Model.Products.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <input asp-for="Products[i].Id" class="form-control" readonly />
+                        </td>
+                        <td>
+                            <input asp-for="Products[i].Name" class="form-control" readonly />
+                        </td>
+                        <td>
+                            <input asp-for="Products[i].Price" class="form-control" />
+                            <span asp-validation-for="Products[i].Price" class="text-danger"></span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" asp-route-type="@Model.Type" class="btn btn-outline-light btn-back-list ms-2">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
