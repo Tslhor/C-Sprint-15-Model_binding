@@ -27,13 +27,15 @@
                 {
                     <tr>
                         <td>
-                            <input asp-for="Products[i].Id" class="form-control" readonly />
+                            <input asp-for="Products[i].Id" type="hidden" />
+                            <span class="form-control disabled">@Model.Products[i].Id</span>
                         </td>
                         <td>
-                            <input asp-for="Products[i].Name" class="form-control" readonly />
+                            <input asp-for="Products[i].Name" type="hidden" />
+                            <span class="form-control disabled">@Model.Products[i].Name</span>
                         </td>
                         <td>
-                            <input asp-for="Products[i].Price" class="form-control" />
+                            <input asp-for="Products[i].Price" class="form-control" type="text" />
                             <span asp-validation-for="Products[i].Price" class="text-danger"></span>
                         </td>
                     </tr>
@@ -53,4 +55,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $.validator.methods.number = function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+
+            return /^-?(\d+([\.,]\d+)?)$/.test(value);
+        };
+    </script>
 }
