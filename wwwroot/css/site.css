@@ -120,12 +120,15 @@ body {
 }
 
 .btn-back-list {
+  color: #fff;
+  border-color: #fff;
+  background-color: #fff;
   color: #000;
-  border-color: #000;
 }
 
 .btn-back-list:hover,
 .btn-back-list:focus {
+  background-color: #e9ecef;
   color: #000;
-  border-color: #000;
+  border-color: #fff;
 }
